@@ -3,8 +3,11 @@
 # Virtual Environment
 venv
 
-# octofit tracker app
-# octfit-tracker
+# Personal Finance App
+.env
+dist/
+frontend/node_modules/
+frontend/build/
 
 # React node_modules
 node_modules

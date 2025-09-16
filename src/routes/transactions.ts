@@ -48,7 +48,7 @@ router.get('/', async (req: Request, res: Response) => {
             }
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch transactions', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch transactions', details: (error as Error).message });
     }
 });
 
@@ -91,7 +91,7 @@ router.post('/', async (req: Request, res: Response) => {
 
         res.status(201).json(transaction);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create transaction', details: error.message });
+        res.status(500).json({ error: 'Failed to create transaction', details: (error as Error).message });
     }
 });
 
@@ -108,7 +108,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
         res.json(transaction);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch transaction', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch transaction', details: (error as Error).message });
     }
 });
 
@@ -136,7 +136,7 @@ router.put('/:id', async (req: Request, res: Response) => {
         const transaction = await transactionService.updateTransaction(transactionId, updates);
         res.json(transaction);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update transaction', details: error.message });
+        res.status(500).json({ error: 'Failed to update transaction', details: (error as Error).message });
     }
 });
 
@@ -147,7 +147,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
         await transactionService.deleteTransaction(transactionId);
         res.json({ message: 'Transaction deleted successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete transaction', details: error.message });
+        res.status(500).json({ error: 'Failed to delete transaction', details: (error as Error).message });
     }
 });
 
@@ -173,7 +173,7 @@ router.post('/bulk-update', async (req: Request, res: Response) => {
         await transactionService.bulkUpdateTransactions(transactionIds, updates);
         res.json({ message: `${transactionIds.length} transactions updated successfully` });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to bulk update transactions', details: error.message });
+        res.status(500).json({ error: 'Failed to bulk update transactions', details: (error as Error).message });
     }
 });
 
@@ -189,7 +189,7 @@ router.delete('/bulk-delete', async (req: Request, res: Response) => {
         await transactionService.bulkDeleteTransactions(transactionIds);
         res.json({ message: `${transactionIds.length} transactions deleted successfully` });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to bulk delete transactions', details: error.message });
+        res.status(500).json({ error: 'Failed to bulk delete transactions', details: (error as Error).message });
     }
 });
 
@@ -200,7 +200,7 @@ router.get('/account/:accountId/balance', async (req: Request, res: Response) =>
         const balance = await transactionService.getAccountBalance(accountId);
         res.json({ accountId, balance });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to get account balance', details: error.message });
+        res.status(500).json({ error: 'Failed to get account balance', details: (error as Error).message });
     }
 });
 

@@ -39,7 +39,7 @@ router.post('/preview-qif', upload.single('file'), async (req: Request, res: Res
 
         res.json(preview);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to preview QIF import', details: error.message });
+        res.status(500).json({ error: 'Failed to preview QIF import', details: (error as Error).message });
     }
 });
 
@@ -78,7 +78,7 @@ router.post('/preview-csv', upload.single('file'), async (req: Request, res: Res
 
         res.json(preview);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to preview CSV import', details: error.message });
+        res.status(500).json({ error: 'Failed to preview CSV import', details: (error as Error).message });
     }
 });
 
@@ -109,7 +109,7 @@ router.post('/execute', async (req: Request, res: Response) => {
             errors: result.errors
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to execute import', details: error.message });
+        res.status(500).json({ error: 'Failed to execute import', details: (error as Error).message });
     }
 });
 
@@ -171,8 +171,8 @@ router.use((error: any, req: Request, res: Response, next: any) => {
         }
     }
     
-    if (error.message === 'Only QIF and CSV files are allowed') {
-        return res.status(400).json({ error: error.message });
+    if ((error as Error).message === 'Only QIF and CSV files are allowed') {
+        return res.status(400).json({ error: (error as Error).message });
     }
     
     next(error);

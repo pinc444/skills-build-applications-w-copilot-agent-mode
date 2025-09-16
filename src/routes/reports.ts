@@ -64,7 +64,7 @@ router.get('/balance-sheet', async (req: Request, res: Response) => {
 
         res.json(balanceSheet);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate balance sheet', details: error.message });
+        res.status(500).json({ error: 'Failed to generate balance sheet', details: (error as Error).message });
     }
 });
 
@@ -127,7 +127,7 @@ router.get('/income-statement', async (req: Request, res: Response) => {
 
         res.json(incomeStatement);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate income statement', details: error.message });
+        res.status(500).json({ error: 'Failed to generate income statement', details: (error as Error).message });
     }
 });
 
@@ -205,7 +205,7 @@ router.get('/category-analysis', async (req: Request, res: Response) => {
 
         res.json(analysis);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate category analysis', details: error.message });
+        res.status(500).json({ error: 'Failed to generate category analysis', details: (error as Error).message });
     }
 });
 
@@ -275,7 +275,7 @@ router.get('/monthly-trend', async (req: Request, res: Response) => {
 
         res.json(trend);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate monthly trend', details: error.message });
+        res.status(500).json({ error: 'Failed to generate monthly trend', details: (error as Error).message });
     }
 });
 
@@ -312,7 +312,7 @@ router.get('/budget-suggestions', async (req: Request, res: Response) => {
             disclaimer: 'These are automated suggestions. Please review and adjust based on your financial goals.'
         });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to generate budget suggestions', details: error.message });
+        res.status(500).json({ error: 'Failed to generate budget suggestions', details: (error as Error).message });
     }
 });
 

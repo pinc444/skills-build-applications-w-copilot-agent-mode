@@ -25,7 +25,7 @@ router.get('/', async (req: Request, res: Response) => {
 
         res.json(safeAccounts);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch accounts', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch accounts', details: (error as Error).message });
     }
 });
 
@@ -55,7 +55,7 @@ router.post('/', async (req: Request, res: Response) => {
         
         res.status(201).json(savedAccount);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create account', details: error.message });
+        res.status(500).json({ error: 'Failed to create account', details: (error as Error).message });
     }
 });
 
@@ -80,7 +80,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
         res.json(safeAccount);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch account', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch account', details: (error as Error).message });
     }
 });
 
@@ -119,7 +119,7 @@ router.put('/:id', async (req: Request, res: Response) => {
 
         res.json(safeAccount);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update account', details: error.message });
+        res.status(500).json({ error: 'Failed to update account', details: (error as Error).message });
     }
 });
 
@@ -140,7 +140,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
         
         res.json({ message: 'Account deactivated successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete account', details: error.message });
+        res.status(500).json({ error: 'Failed to delete account', details: (error as Error).message });
     }
 });
 
@@ -162,7 +162,7 @@ router.post('/:id/puppeteer-config', async (req: Request, res: Response) => {
         
         res.json({ message: 'Configuration saved successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to save configuration', details: error.message });
+        res.status(500).json({ error: 'Failed to save configuration', details: (error as Error).message });
     }
 });
 
@@ -188,7 +188,7 @@ router.get('/:id/puppeteer-config', async (req: Request, res: Response) => {
 
         res.json(safeConfig);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch configuration', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch configuration', details: (error as Error).message });
     }
 });
 
@@ -201,7 +201,7 @@ router.post('/:id/test-selectors', async (req: Request, res: Response) => {
         const result = await puppeteerService.testSelectors(config);
         res.json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to test selectors', details: error.message });
+        res.status(500).json({ error: 'Failed to test selectors', details: (error as Error).message });
     }
 });
 
@@ -214,7 +214,7 @@ router.post('/:id/fetch-data', async (req: Request, res: Response) => {
         const result = await puppeteerService.triggerDataFetch(accountId);
         res.json(result);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch data', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch data', details: (error as Error).message });
     }
 });
 

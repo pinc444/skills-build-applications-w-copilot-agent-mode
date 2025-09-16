@@ -112,7 +112,7 @@ app.use((error: any, req: express.Request, res: express.Response, next: express.
     if (error.name === 'ValidationError') {
         return res.status(400).json({
             error: 'Validation Error',
-            details: error.message
+            details: (error as Error).message
         });
     }
     
@@ -125,7 +125,7 @@ app.use((error: any, req: express.Request, res: express.Response, next: express.
     
     res.status(500).json({
         error: 'Internal Server Error',
-        message: process.env.NODE_ENV === 'development' ? error.message : 'Something went wrong'
+        message: process.env.NODE_ENV === 'development' ? (error as Error).message : 'Something went wrong'
     });
 });
 

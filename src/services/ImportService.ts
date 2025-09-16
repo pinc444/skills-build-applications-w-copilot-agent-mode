@@ -202,7 +202,7 @@ export class ImportService {
 
                 successCount++;
             } catch (error) {
-                errors.push(`Row ${transaction.originalIndex + 1}: ${error.message}`);
+                errors.push(`Row ${transaction.originalIndex + 1}: ${(error as Error).message}`);
             }
         }
 

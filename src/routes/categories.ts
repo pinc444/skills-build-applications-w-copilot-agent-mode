@@ -23,7 +23,7 @@ router.get('/', async (req: Request, res: Response) => {
         const categories = await queryBuilder.getMany();
         res.json(categories);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch categories', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch categories', details: (error as Error).message });
     }
 });
 
@@ -53,7 +53,7 @@ router.post('/', async (req: Request, res: Response) => {
         const savedCategory = await categoryRepository.save(category);
         res.status(201).json(savedCategory);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create category', details: error.message });
+        res.status(500).json({ error: 'Failed to create category', details: (error as Error).message });
     }
 });
 
@@ -71,7 +71,7 @@ router.get('/:id', async (req: Request, res: Response) => {
 
         res.json(category);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch category', details: error.message });
+        res.status(500).json({ error: 'Failed to fetch category', details: (error as Error).message });
     }
 });
 
@@ -97,13 +97,13 @@ router.put('/:id', async (req: Request, res: Response) => {
         }
         if (description !== undefined) category.description = description;
         if (color !== undefined) category.color = color;
-        if (parentId !== undefined) category.parentId = parentId ? parseInt(parentId) : null;
+        if (parentId !== undefined) category.parentId = parentId ? parseInt(parentId) : undefined;
         if (active !== undefined) category.active = active;
 
         const savedCategory = await categoryRepository.save(category);
         res.json(savedCategory);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to update category', details: error.message });
+        res.status(500).json({ error: 'Failed to update category', details: (error as Error).message });
     }
 });
 
@@ -124,7 +124,7 @@ router.delete('/:id', async (req: Request, res: Response) => {
         
         res.json({ message: 'Category deactivated successfully' });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to delete category', details: error.message });
+        res.status(500).json({ error: 'Failed to delete category', details: (error as Error).message });
     }
 });
 
